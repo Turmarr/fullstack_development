@@ -6,17 +6,20 @@ const Header = (props) => (
   </div>
 )
 
-const Content = (props) => (
+const Part = (props) => (
   <div>
     <p>
-        {props.p1} {props.e1}
-      </p>
-      <p>
-        {props.p2} {props.e2}
-      </p>
-      <p>
-        {props.p3} {props.e3}
-      </p>
+      {props.p} {props.e}
+    </p>
+  </div>
+  
+)
+
+const Content = (props) => (
+  <div>
+    <Part p={props.p1} e={props.e1} />
+    <Part p={props.p2} e={props.e2} />
+    <Part p={props.p3} e={props.e3} />
   </div>
 )
 

@@ -13,12 +13,11 @@ const Button = ({handler, text}) => (
   </button>
 )
 
-const StatisticLine = ({text, value}) => (
-  <div>
-    <p>
-      {text} {value}
-    </p>
-  </div>
+const StatisticLine = ({text, value, sign}) => (
+  <tr>
+    <td>{text} </td>
+    <td>{value} {sign}</td>
+  </tr>
 )
 
 const Statistics = ({values, text}) => {
@@ -36,12 +35,16 @@ const Statistics = ({values, text}) => {
     const pos = values[0]/sum * 100
     return (
       <div>
-        <StatisticLine value={values[0]} text={text[0]}/>
-        <StatisticLine value={values[1]} text={text[1]}/>
-        <StatisticLine value={values[2]} text={text[2]}/>
-        <StatisticLine value={sum} text={text[3]}/>
-        <StatisticLine value={ave} text={text[4]}/>
-        <StatisticLine value={pos} text={text[5]}/>
+        <table>
+          <tbody>
+            <StatisticLine value={values[0]} text={text[0]} sign=""/>
+            <StatisticLine value={values[1]} text={text[1]} sign=""/>
+            <StatisticLine value={values[2]} text={text[2]} sign=""/>
+            <StatisticLine value={sum} text={text[3]} sign=""/>
+            <StatisticLine value={ave} text={text[4]} sign=""/>
+            <StatisticLine value={pos} text={text[5]} sign="%"/>
+          </tbody>
+        </table>
       </div>
     )
   }

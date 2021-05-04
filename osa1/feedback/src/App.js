@@ -21,11 +21,51 @@ const BasicInfo = ({value, text}) => (
   </div>
 )
 
+const Total = ({values, text}) => (
+  <div>
+    <p>
+      {text} {values.reduce((a,b) => a + b, 0)}
+    </p>
+  </div>
+)
+
+const Average = ({values, text}) => {
+  const sum = values.reduce((a,b) => a + b, 0)
+  let ave = 0
+  if (sum !== 0) {
+    ave = (values[0]-values[2])/sum
+  }
+  return (
+  <div>
+    <p>
+      {text} {ave}
+    </p>
+  </div> )
+}
+
+const Positive = ({values, text}) => {
+  const sum = values.reduce((a,b) => a + b, 0)
+  let pos = 0
+  if (sum !== 0) {
+    pos = values[0]*100/sum
+  }
+  return (
+    <div>
+      <p>
+        {text} {pos}
+      </p>
+    </div>
+  )
+}
+
 const Content = ({values, text}) => (
   <div>
     <BasicInfo value={values[0]} text={text[0]}/>
     <BasicInfo value={values[1]} text={text[1]}/>
     <BasicInfo value={values[2]} text={text[2]}/>
+    <Total values={values} text={text[3]}/>
+    <Average values={values} text={text[4]}/>
+    <Positive values={values} text={text[5]}/>
   </div>
 )
 
@@ -35,7 +75,7 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  const statistic_labels = ["good","neutral","bad"]
+  const statistic_labels = ["good","neutral","bad","all","average","positive"]
 
   return (
     <div>

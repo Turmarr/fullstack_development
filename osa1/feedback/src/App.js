@@ -58,7 +58,7 @@ const Positive = ({values, text}) => {
   )
 }
 
-const Content = ({values, text}) => (
+const Statistics = ({values, text}) => (
   <div>
     <BasicInfo value={values[0]} text={text[0]}/>
     <BasicInfo value={values[1]} text={text[1]}/>
@@ -84,7 +84,7 @@ const App = () => {
       <Button handler={() => setNeutral(neutral + 1)} text={statistic_labels[1]}/>
       <Button handler={() => setBad(bad + 1)} text={statistic_labels[2]}/>
       <Header text={"statistics"}/>
-      <Content values={[good, neutral, bad]} text={statistic_labels}/>
+      <Statistics values={[good, neutral, bad]} text={statistic_labels}/>
     </div>
   )
 }

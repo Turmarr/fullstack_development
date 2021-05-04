@@ -18,20 +18,34 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
+  const [highest, setHighest] = useState(0)
 
   const handleRand = () => {
     const rand = Math.floor(Math.random() * anecdotes.length)
     setSelected(rand)
   }
 
+  const maxIndex = (copy) => {
+    const max = Math.max(...copy)
+    const mi = copy.indexOf(max)
+    return mi
+  }
+
   const vote = () => {
     let copy = [...votes]
     copy[selected] += 1
     setVotes(copy)
+    //console.log(copy)
+    const mi = maxIndex(copy)
+    //console.log(mi)
+    setHighest(mi)
   }
+
+
 
   return (
     <div>
+      <h1>Anecdotes</h1>
       <p>
         {anecdotes[selected]}
       </p>
@@ -40,6 +54,14 @@ const App = () => {
       </p>
       <Button handler={vote} text="vote"/>
       <Button handler={handleRand} text={"new anecdote"}/>
+      <h1>Anecdote with most votes</h1>
+      <p>
+        {anecdotes[highest]}
+      </p>
+      <p>
+        has {votes[highest]} votes
+      </p>
+
     </div>
   )
 }

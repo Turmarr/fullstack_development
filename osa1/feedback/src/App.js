@@ -13,7 +13,7 @@ const Button = ({handler, text}) => (
   </button>
 )
 
-const BasicInfo = ({value, text}) => (
+const StatisticLine = ({text, value}) => (
   <div>
     <p>
       {text} {value}
@@ -21,53 +21,31 @@ const BasicInfo = ({value, text}) => (
   </div>
 )
 
-const Total = ({values, text}) => (
-  <div>
-    <p>
-      {text} {values.reduce((a,b) => a + b, 0)}
-    </p>
-  </div>
-)
-
-const Average = ({values, text}) => {
+const Statistics = ({values, text}) => {
   const sum = values.reduce((a,b) => a + b, 0)
-  let ave = 0
-  if (sum !== 0) {
-    ave = (values[0]-values[2])/sum
+  if (sum === 0) {
+    return (
+      <div>
+        <p>
+          No feedback given
+        </p>
+      </div>
+    )
+  } else {
+    const ave = (values[0]-values[2])/sum
+    const pos = values[0]/sum * 100
+    return (
+      <div>
+        <StatisticLine value={values[0]} text={text[0]}/>
+        <StatisticLine value={values[1]} text={text[1]}/>
+        <StatisticLine value={values[2]} text={text[2]}/>
+        <StatisticLine value={sum} text={text[3]}/>
+        <StatisticLine value={ave} text={text[4]}/>
+        <StatisticLine value={pos} text={text[5]}/>
+      </div>
+    )
   }
-  return (
-  <div>
-    <p>
-      {text} {ave}
-    </p>
-  </div> )
 }
-
-const Positive = ({values, text}) => {
-  const sum = values.reduce((a,b) => a + b, 0)
-  let pos = 0
-  if (sum !== 0) {
-    pos = values[0]*100/sum
-  }
-  return (
-    <div>
-      <p>
-        {text} {pos}
-      </p>
-    </div>
-  )
-}
-
-const Statistics = ({values, text}) => (
-  <div>
-    <BasicInfo value={values[0]} text={text[0]}/>
-    <BasicInfo value={values[1]} text={text[1]}/>
-    <BasicInfo value={values[2]} text={text[2]}/>
-    <Total values={values} text={text[3]}/>
-    <Average values={values} text={text[4]}/>
-    <Positive values={values} text={text[5]}/>
-  </div>
-)
 
 const App = () => {
   // tallenna napit omaan tilaansa
